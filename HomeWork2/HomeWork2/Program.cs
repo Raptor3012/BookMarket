@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
 namespace HomeWork2
 {
@@ -6,7 +7,12 @@ namespace HomeWork2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Library lb1 = new Library();
+            Book bk1 = new Book("Greg", "Greg Toms", FormatBook.paper, 15);
+            Book bk2 = new Book("Gregg", "Gregg Toms", FormatBook.paper, 150);
+
+
+            
         }
     }
 }
