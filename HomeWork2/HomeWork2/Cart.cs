@@ -7,7 +7,7 @@ namespace HomeWork2
         private List<Book> ListBook = new List<Book>();
 
         public Cart()
-        {}
+        { }
 
         public void AddBook(Book book)
         {
@@ -27,12 +27,26 @@ namespace HomeWork2
             return 0;
         }
 
-
-
-
-
-
+        public int ApplyPromo(IPromo promo)
+        {
+           return promo.ApplyPromo();
+        }
     }
 
+    class FreeBook:IPromo
+    {
+        Book freebook;
+        
+        public FreeBook(Book book)
+        {
+            this.freebook = book;
+        }
+
+        public int ApplyPromo()
+        {
+
+            return 0;
+        }
+    }
 
 }
