@@ -4,7 +4,7 @@ namespace HomeWork2
 {
     class Library
     {
-        private HashSet<Book> ListBook = new HashSet<Book>();
+        public readonly List<Book> ListBook = new List<Book>();
 
         public Library()
         {}
@@ -14,9 +14,9 @@ namespace HomeWork2
             this.ListBook.Add(book);
         }
 
-        public Book CreateBook(string name, string author, FormatBook typeBook, int price)
+        public Book CreateBook(string name, string author,  int price, FormatBook typeBook)
         {
-            Book book = new Book(name, author, typeBook, price);
+            Book book = new Book(name, author, price, typeBook);
             this.AddBook(book);
             return book;
         }

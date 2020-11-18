@@ -4,49 +4,42 @@ namespace HomeWork2
 {
     class Cart
     {
-        private List<Book> ListBook = new List<Book>();
+        public readonly List<Book> ListBook;
+        public readonly double Cost;
+        public double CostWithDiscounts;
+        private List<IPromo> ListPromo = new List<IPromo>();
+        private int Delivery;
 
-        public Cart()
-        { }
 
-        public void AddBook(Book book)
+        public Cart(List<Book> listBook)
         {
-            this.ListBook.Add(book);
-        }
-
-        public int CalcPayment()
-        {
-            int result = 0;
-            foreach (Book book in this.ListBook)
+            this.ListBook = listBook;
+            this.Cost = 0;
+            this.CostWithDiscounts = 0;
+            this.Delivery = 200;
+            foreach (Book book in listBook)
             {
-                result += book.GetPrice();
+                this.Cost += book.Price;
             }
-
-
-
-            return 0;
         }
 
-        public int ApplyPromo(IPromo promo)
+        public void ApplyPromo(IPromo promo)
         {
-           return promo.ApplyPromo();
+            this.ListPromo.Add(promo);
         }
-    }
 
-    class FreeBook:IPromo
-    {
-        Book freebook;
+        public void CalcPayment()
+        {
+            this.CostWithDiscounts = this.Cost;
+            foreach (var promo in this.ListPromo)
+            {
+               promo.ApplyPromo(this);
+            }
+                
+
+        }
+
         
-        public FreeBook(Book book)
-        {
-            this.freebook = book;
-        }
-
-        public int ApplyPromo()
-        {
-
-            return 0;
-        }
     }
 
 }

@@ -2,23 +2,17 @@
 {
     class Book
     {
-        private string Name;
-        private string Author;
-        private FormatBook TypeBook;
-        private int Price;
+        public readonly string Name;
+        public readonly string Author;
+        public readonly int Price;
+        public readonly FormatBook TypeBook;
 
-        public Book(string name, string author, FormatBook typeBook, int price)
+        public Book(string name, string author, int price, FormatBook typeBook)
         {
             Name = name;
             Author = author;
-            TypeBook = typeBook;
             Price = price;
-        }
-
-        public int GetPrice()
-        {
-            int price = this.Price;
-            return price;
+            TypeBook = typeBook;
         }
     }
 
