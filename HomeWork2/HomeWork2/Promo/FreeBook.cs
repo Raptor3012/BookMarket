@@ -11,11 +11,11 @@ namespace HomeWork2
             this.freebook = book;
         }
 
-        public void ApplyPromo(Cart cart)
+        public void ApplyPromo(Order order)
         {
-            if (cart.ListBook.Contains(this.freebook))
+            if (order.ListBook.Contains(this.freebook))
             {
-                cart.CostWithDiscounts -= freebook.Price;
+                order.Discount += freebook.Price;
             }            
         }
     }

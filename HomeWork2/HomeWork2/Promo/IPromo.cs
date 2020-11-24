@@ -3,9 +3,7 @@ namespace HomeWork2
 {
     interface IPromo
     {
-        public void ApplyPromo(Cart cart);
+        public void ApplyPromo(Order order);
     }
-
-
 
 }

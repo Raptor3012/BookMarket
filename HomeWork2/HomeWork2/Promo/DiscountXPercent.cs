@@ -6,14 +6,14 @@ namespace HomeWork2
     {
         uint Xpercent = 0;
 
-        public DiscountXPercent(uint Xpercent)
+        public DiscountXPercent(uint xpercent)
         {
-            this.Xpercent = Xpercent;
+            this.Xpercent = xpercent;
         }
 
-        public void ApplyPromo(Cart cart)
+        public void ApplyPromo(Order order)
         {
-            cart.CostWithDiscounts -= Math.Round(cart.Cost / 100.0 * this.Xpercent);
+            order.Discount += Math.Round(order.Cost / 100.0 * this.Xpercent);
         }
     }
 }

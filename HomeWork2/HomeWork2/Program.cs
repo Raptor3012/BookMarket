@@ -41,12 +41,13 @@ namespace HomeWork2
 
             FreeBook freebook = new FreeBook(library.ListBook[2]);
             DiscountXPercent discX = new DiscountXPercent(10);
+            FreeDelivery freedeliv = new FreeDelivery();
 
             cart1.ApplyPromo(freebook);
             cart1.ApplyPromo(discX);
-            cart1.CalcPayment();
-            Console.WriteLine(cart1.Cost);
-            Console.WriteLine(cart1.CostWithDiscounts);
+            //cart1.ApplyPromo(freedeliv);
+            double result = cart1.CalcPayment();
+            Console.WriteLine(result);
 
         }
     }
