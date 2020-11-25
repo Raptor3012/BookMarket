@@ -35,7 +35,7 @@ namespace HomeWork2
             library.CreateBook("Гарри Поттер и тайная комната", "Джоан Роулинг", 1000, FormatBook.fb2);
             library.CreateBook("Гарри Поттер и узник Азкабана", "Джоан Роулинг", 1000, FormatBook.fb2);
 
-            List<Book> pokupki = new List<Book>() { library.ListBook[1], library.ListBook[2], library.ListBook[3] };
+            List<Book> pokupki = new List<Book>() { library.ListBook[1], library.ListBook[1], library.ListBook[8], library.ListBook[2], library.ListBook[3], library.ListBook[14], library.ListBook[16] };
             Cart cart1 = new Cart(pokupki);
            
 
@@ -43,11 +43,16 @@ namespace HomeWork2
             DiscountXPercent discX = new DiscountXPercent(10);
             FreeDelivery freedeliv = new FreeDelivery();
 
+            DoubleBookandFreefb2 dbffb2 = new DoubleBookandFreefb2();
+            PaperDelivery paperdeliv = new PaperDelivery();
+
             cart1.ApplyPromo(freebook);
             cart1.ApplyPromo(discX);
+            cart1.ApplyStok(dbffb2);
+            cart1.ApplyStok(paperdeliv);
             //cart1.ApplyPromo(freedeliv);
-            double result = cart1.CalcPayment();
-            Console.WriteLine(result);
+            cart1.PrintContentCart();
+            cart1.CalcPayment();
 
         }
     }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeWork2
 {
@@ -21,6 +23,37 @@ namespace HomeWork2
             return book;
         }
 
+        public void PrintLibrari()
+        {
+            var groupbyAuthor = from book in this.ListBook
+                                group book by book.Author into groupautor
+                                select new
+                                {
+                                    Author = groupautor.Key,
+                                    groupbyType = from book in groupautor
+                                                  group book by book.TypeBook into grouptype
+                                                  select new
+                                                  {
+                                                      Nametype = grouptype.Key,
+                                                      Count = grouptype.Count(),
+                                                      book = from book in grouptype select book
+                                                  }
+                                };
+            foreach (var g in groupbyAuthor)
+            {
+                Console.WriteLine(g.Author);
+                foreach (var t in g.groupbyType)
+                {
+
+                    Console.WriteLine($"{t.Nametype} : {t.Count}");
+                    foreach (var book in t.book)
+                    {
+                        Console.WriteLine("     " + book.Name);
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
 
     }
 }

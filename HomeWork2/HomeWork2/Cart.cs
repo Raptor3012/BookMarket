@@ -1,33 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeWork2
 {
-    class Order
-    {
-        public readonly List<Book> ListBook;
-        public readonly double Cost;
-        public double Discount;
-        public int Delivery;
-
-        public Order(List<Book> listbook)
-        {
-            this.ListBook = listbook;
-            foreach (Book book in this.ListBook)
-            {
-                this.Cost += book.Price;
-                this.Discount = 0;
-                this.Delivery = 200;
-            }
-        }
-
-        public double TotalCost => Math.Max(Cost - Discount, 0);
-    }
-
     class Cart
     {
         private readonly Order Order;
-        private List<IPromo> ListPromo = new List<IPromo>(); 
+        private List<IPromo> ListPromo = new List<IPromo>();
+        private List<IStok> ListStok = new List<IStok>();
 
         public Cart(List<Book> listBook)
         {
@@ -39,6 +20,43 @@ namespace HomeWork2
             this.ListPromo.Add(promo);
         }
 
+        public void ApplyStok(IStok stok)
+        {
+            this.ListStok.Add(stok);
+        }
+
+        public void PrintContentCart()
+        {
+            var groupbyAuthor = from book in this.Order.ListBook
+                                     group book by book.Author into groupautor
+                                     select new
+                                     {
+                                         Author = groupautor.Key,
+                                         groupbyType = from book in groupautor
+                                                       group book by book.TypeBook into grouptype
+                                                       select new
+                                                       {
+                                                           Nametype = grouptype.Key,
+                                                           Count = grouptype.Count(),
+                                                           book = from book in grouptype select book
+                                                       }
+                                     };
+            foreach (var g in groupbyAuthor)
+            {
+                Console.WriteLine(g.Author);
+                foreach (var t in g.groupbyType)
+                {
+
+                    Console.WriteLine($"{t.Nametype} : {t.Count}");
+                    foreach (var book in t.book)
+                    {
+                        Console.WriteLine("     " + book.Name);
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
         public double CalcPayment()
         {
             foreach (var promo in this.ListPromo)
@@ -46,9 +64,16 @@ namespace HomeWork2
                promo.ApplyPromo(this.Order);
             }
 
-
-            Console.WriteLine(Order.Delivery);
+            foreach (var promo in this.ListStok)
+            {
+                promo.ApplyStok(this.Order);
+            }
             double result = this.Order.TotalCost;
+            Console.WriteLine($"Цена { Order.Cost}");
+            Console.WriteLine($"Доставка { Order.Delivery}");
+            Console.WriteLine($"Скидка { Order.Discount}");
+            Console.WriteLine($"Итого { result}");
+
             return result;
         }
 
