@@ -36,22 +36,16 @@ namespace HomeWork2
             library.CreateBook("Гарри Поттер и узник Азкабана", "Джоан Роулинг", 1000, FormatBook.fb2);
 
             List<Book> pokupki = new List<Book>() { library.ListBook[1], library.ListBook[1], library.ListBook[8], library.ListBook[2], library.ListBook[3], library.ListBook[14], library.ListBook[16] };
-            ActionProvider actionProvaiser = new ActionProvider();
-            Cart cart1 = new Cart(pokupki, actionProvaiser);
+            ActionProvider actionProvaider = new ActionProvider();
+            Cart cart1 = new Cart(pokupki, actionProvaider);
            
 
             FreeBook freebook = new FreeBook(library.ListBook[2]);
             DiscountXPercent discX = new DiscountXPercent(10);
             FreeDelivery freedeliv = new FreeDelivery();
 
-            TwoPaperForOneElectronicBook dbffb2 = new TwoPaperForOneElectronicBook();
-            PaperDelivery paperdeliv = new PaperDelivery();
-
             cart1.ApplyPromo(freebook);
             cart1.ApplyPromo(discX);
-            //cart1.ApplyAction(dbffb2);
-            //cart1.ApplyAction(paperdeliv);
-            //cart1.ApplyAction(freedeliv);
             cart1.PrintContentCart();
             cart1.CalcPayment();
 

@@ -8,7 +8,6 @@ namespace HomeWork2
     {
         private readonly Order Order;
         private List<IPromo> ListPromo = new List<IPromo>();
-        //private List<IAction> ListAction = new List<IAction>();
         private IActionProvider actionProvider;
 
         public Cart(List<Book> listBook, IActionProvider actionProvider)
@@ -21,11 +20,6 @@ namespace HomeWork2
         {
             this.ListPromo.Add(promo);
         }
-
-        //public void ApplyAction(IAction action)
-        //{
-        //    this.ListAction.Add(action);
-        //}
 
         public void PrintContentCart()
         {
@@ -68,10 +62,6 @@ namespace HomeWork2
 
             actionProvider.GetActiveActions().ForEach(a => a.ApplyAction(this.Order));
 
-            //foreach (var promo in this.ListAction)
-            //{
-            //    promo.ApplyAction(this.Order);
-            //}
             double result = this.Order.TotalCost;
             Console.WriteLine($"Цена { Order.Cost}");
             Console.WriteLine($"Доставка { Order.Delivery}");
