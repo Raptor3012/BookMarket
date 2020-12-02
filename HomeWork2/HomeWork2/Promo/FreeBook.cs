@@ -4,18 +4,18 @@ namespace HomeWork2
 {
     class FreeBook :IPromo
     {
-        Book freebook;
+        Book freeBook;
         
         public FreeBook(Book book)
         {
-            this.freebook = book;
+            this.freeBook = book;
         }
 
         public void ApplyPromo(Order order)
         {
-            if (order.ListBook.Contains(this.freebook))
+            if (order.ListBook.Contains(this.freeBook))
             {
-                order.Discount += freebook.Price;
+                order.Discount += freeBook.Price;
             }            
         }
     }

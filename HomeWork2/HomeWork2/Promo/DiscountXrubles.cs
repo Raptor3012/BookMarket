@@ -1,17 +1,17 @@
 ﻿namespace HomeWork2
 {
-    class DiscountXrubles : IPromo
+    class DiscountXRubles : IPromo
     {
-        uint Xrubles = 0;
+        uint XRubles = 0;
 
-        public DiscountXrubles(uint xrubles)
+        public DiscountXRubles(uint xrubles)
         {
-            this.Xrubles = xrubles;
+            this.XRubles = xrubles;
         }
 
         public void ApplyPromo(Order order)
         {
-            order.Discount += this.Xrubles;
+            order.Discount += this.XRubles;
         }
     }
 

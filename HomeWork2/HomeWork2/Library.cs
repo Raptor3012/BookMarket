@@ -23,7 +23,7 @@ namespace HomeWork2
             return book;
         }
 
-        public void PrintLibrari()
+        public void PrintLibrary()
         {
             var groupbyAuthor = from book in this.ListBook
                                 group book by book.Author into groupautor

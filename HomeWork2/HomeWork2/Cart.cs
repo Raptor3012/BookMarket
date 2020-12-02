@@ -8,7 +8,7 @@ namespace HomeWork2
     {
         private readonly Order Order;
         private List<IPromo> ListPromo = new List<IPromo>();
-        private List<IStok> ListStok = new List<IStok>();
+        private List<IAction> ListAction = new List<IAction>();
 
         public Cart(List<Book> listBook)
         {
@@ -20,35 +20,35 @@ namespace HomeWork2
             this.ListPromo.Add(promo);
         }
 
-        public void ApplyStok(IStok stok)
+        public void ApplyAction(IAction action)
         {
-            this.ListStok.Add(stok);
+            this.ListAction.Add(action);
         }
 
         public void PrintContentCart()
         {
-            var groupbyAuthor = from book in this.Order.ListBook
-                                     group book by book.Author into groupautor
+            var authorGroups = from book in this.Order.ListBook
+                                     group book by book.Author into groupAutor
                                      select new
                                      {
-                                         Author = groupautor.Key,
-                                         groupbyType = from book in groupautor
-                                                       group book by book.TypeBook into grouptype
+                                         authorName = groupAutor.Key,
+                                         groupType = from book in groupAutor
+                                                       group book by book.TypeBook into groupType
                                                        select new
                                                        {
-                                                           Nametype = grouptype.Key,
-                                                           Count = grouptype.Count(),
-                                                           book = from book in grouptype select book
+                                                           nameType = groupType.Key,
+                                                           count = groupType.Count(),
+                                                           book = from book in groupType select book
                                                        }
                                      };
-            foreach (var g in groupbyAuthor)
+            foreach (var author in authorGroups)
             {
-                Console.WriteLine(g.Author);
-                foreach (var t in g.groupbyType)
+                Console.WriteLine(author.authorName);
+                foreach (var typeBook in author.groupType)
                 {
 
-                    Console.WriteLine($"{t.Nametype} : {t.Count}");
-                    foreach (var book in t.book)
+                    Console.WriteLine($"{typeBook.nameType} : {typeBook.count}");
+                    foreach (var book in typeBook.book)
                     {
                         Console.WriteLine("     " + book.Name);
                     }
@@ -64,9 +64,9 @@ namespace HomeWork2
                promo.ApplyPromo(this.Order);
             }
 
-            foreach (var promo in this.ListStok)
+            foreach (var promo in this.ListAction)
             {
-                promo.ApplyStok(this.Order);
+                promo.ApplyAction(this.Order);
             }
             double result = this.Order.TotalCost;
             Console.WriteLine($"Цена { Order.Cost}");

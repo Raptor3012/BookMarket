@@ -43,14 +43,14 @@ namespace HomeWork2
             DiscountXPercent discX = new DiscountXPercent(10);
             FreeDelivery freedeliv = new FreeDelivery();
 
-            DoubleBookandFreefb2 dbffb2 = new DoubleBookandFreefb2();
+            TwoPaperForOneElectronicBook dbffb2 = new TwoPaperForOneElectronicBook();
             PaperDelivery paperdeliv = new PaperDelivery();
 
             cart1.ApplyPromo(freebook);
             cart1.ApplyPromo(discX);
-            cart1.ApplyStok(dbffb2);
-            cart1.ApplyStok(paperdeliv);
-            //cart1.ApplyPromo(freedeliv);
+            cart1.ApplyAction(dbffb2);
+            cart1.ApplyAction(paperdeliv);
+            //cart1.ApplyAction(freedeliv);
             cart1.PrintContentCart();
             cart1.CalcPayment();
 
